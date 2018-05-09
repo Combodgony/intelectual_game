@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Gamer extends Model
+class Command extends Model
 {
     use CrudTrait;
 
@@ -15,11 +15,11 @@ class Gamer extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'gamer';
+    protected $table = 'command';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['first_name','last_name','birthday','info'];
+    protected $fillable = ['name'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -28,16 +28,18 @@ class Gamer extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function getFullNameAttribute()
-    {
-        return "{$this->first_name} {$this->last_name}";
-    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+
+    public function gamers(){
+        return $this->belongsToMany('App\Models\Gamer','command_hash_gamer',
+        'command_id', 'gamer_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

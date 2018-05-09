@@ -16,6 +16,13 @@
 
 
 <li>
+    <a href="{{ backpack_url('command') }}">
+        <i class="fa fa-user-times"></i>
+        <span>{{ trans('interface.menu.commands') }}</span>
+    </a>
+</li>
+
+<li>
     <a href="{{ backpack_url('round') }}">
         <i class="fa fa-shekel"></i>
         <span>{{ trans('interface.menu.rounds') }}</span>
