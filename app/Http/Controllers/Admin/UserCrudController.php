@@ -37,6 +37,11 @@ class UserCrudController extends CrudController
              'label' => 'Role',
              'type' => 'enum'
          ]);
+        $this->crud->addField([   // Enum
+            'name' => 'role',
+            'label' => 'Role',
+            'type' => 'text'
+        ]);
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');

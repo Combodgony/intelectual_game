@@ -1,5 +1,6 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<?php if (Gate::allows('admin')): ?>
 <li>
     <a href="{{ backpack_url('dashboard') }}">
         <i class="fa fa-dashboard"></i>
@@ -35,6 +36,7 @@
         <span>{{ trans('interface.menu.questions') }}</span>
     </a>
 </li>
+<?php endif; ?>
 <li>
     <a href="{{ backpack_url('user') }}">
         <i class="fa fa-user"></i>

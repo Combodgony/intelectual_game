@@ -25,11 +25,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        if (Gate::allows('admin')) {
-            dd('yes');
-        }else{
-            dd('not');
-        }
         return view('home');
     }
 }
