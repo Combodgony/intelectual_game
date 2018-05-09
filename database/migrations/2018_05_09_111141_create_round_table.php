@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRaundTable extends Migration
+class CreateRoundTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateRaundTable extends Migration
      */
     public function up()
     {
-        Schema::create('raund', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('rounds', function (Blueprint $table) {
+            $table->integer('id')->unsigned()->autoIncrement();
             $table->string('name');
             $table->integer('count_questions');
             $table->integer('max_rating_per_question');
@@ -29,6 +29,6 @@ class CreateRaundTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raund');
+        Schema::dropIfExists('rounds');
     }
 }

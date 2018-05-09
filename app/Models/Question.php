@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-
-class Raund extends Model
+class Question extends Model
 {
     use CrudTrait;
 
@@ -16,11 +15,11 @@ class Raund extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'raund';
+    protected $table = 'questions';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name','count_questions','max_rating_per_question'];
+    protected $fillable = ['question','answer','round_id'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -35,6 +34,14 @@ class Raund extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    /**
+     * @return Round
+     */
+    public function round()
+    {
+        return $this->belongsTo('App\Models\Round');
+    }
+
 
     /*
     |--------------------------------------------------------------------------

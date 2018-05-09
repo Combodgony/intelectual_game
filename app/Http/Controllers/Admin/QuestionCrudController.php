@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\RaundRequest as StoreRequest;
-use App\Http\Requests\RaundRequest as UpdateRequest;
+use App\Http\Requests\QuestionRequest as StoreRequest;
+use App\Http\Requests\QuestionRequest as UpdateRequest;
 
-class RaundCrudController extends CrudController
+class QuestionCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +18,9 @@ class RaundCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Raund');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/raund');
-        $this->crud->setEntityNameStrings('raund', 'raunds');
+        $this->crud->setModel('App\Models\Question');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/question');
+        $this->crud->setEntityNameStrings('question', 'questions');
 
         /*
         |--------------------------------------------------------------------------
@@ -31,6 +31,15 @@ class RaundCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+        $this->crud->addField([
+            'label' => "Round",
+            'type' => 'select2',
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'name' => 'round_id', // the method that defines the relationship in your Model
+            'entity' => 'round', // the method that defines the relationship in your Model
+            'model' => "App\Models\Round", // foreign key model
+
+        ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
