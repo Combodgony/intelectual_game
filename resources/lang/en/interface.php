@@ -17,6 +17,7 @@ return [
         'users'=>'Users',
         'rounds'=>'Rounds',
         'questions'=>'Questions',
+        'gamers'=>'Gamers',
     ],
 
 ];

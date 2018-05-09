@@ -7,6 +7,14 @@
 </li>
 
 <li>
+    <a href="{{ backpack_url('gamer') }}">
+        <i class="fa fa-user-times"></i>
+        <span>{{ trans('interface.menu.gamers') }}</span>
+    </a>
+</li>
+
+
+<li>
     <a href="{{ backpack_url('round') }}">
         <i class="fa fa-shekel"></i>
         <span>{{ trans('interface.menu.rounds') }}</span>
