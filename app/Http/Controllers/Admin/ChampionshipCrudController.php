@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\QuestionRequest as StoreRequest;
-use App\Http\Requests\QuestionRequest as UpdateRequest;
+use App\Http\Requests\ChampionshipRequest as StoreRequest;
+use App\Http\Requests\ChampionshipRequest as UpdateRequest;
 
-class QuestionCrudController extends CrudController
+class ChampionshipCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +18,9 @@ class QuestionCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Question');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/question');
-        $this->crud->setEntityNameStrings('question', 'questions');
+        $this->crud->setModel('App\Models\Championship');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/championship');
+        $this->crud->setEntityNameStrings('championship', 'championships');
 
         /*
         |--------------------------------------------------------------------------
@@ -31,31 +31,13 @@ class QuestionCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
-        $this->crud->addField([
-            'label' => "Round",
-            'type' => 'select2',
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'name' => 'round_id', // the method that defines the relationship in your Model
-            'entity' => 'round', // the method that defines the relationship in your Model
-            'model' => "App\Models\Round", // foreign key model
-
-        ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
-
-         $this->crud->addColumn([
-             'label' => "Round", // Table column heading
-             'type' => "select",
-             'name' => 'round_id', // the column that contains the ID of that connected entity;
-             'entity' => 'round', // the method that defines the relationship in your Model
-             'attribute' => "name", // foreign key attribute that is shown to user
-             'model' => "App\\Models\\Round", // foreign key model
-         ]);
-
+        // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack

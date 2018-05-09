@@ -6,3 +6,4 @@ CRUD::resource('round', 'RoundCrudController');
 CRUD::resource('question', 'QuestionCrudController');
 CRUD::resource('gamer', 'GamerCrudController');
 CRUD::resource('command', 'CommandCrudController');
+CRUD::resource('championship', 'ChampionshipCrudController');
