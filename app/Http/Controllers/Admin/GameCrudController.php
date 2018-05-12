@@ -8,6 +8,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\GameRequest as StoreRequest;
 use App\Http\Requests\GameRequest as UpdateRequest;
+use Illuminate\Http\Request;
 
 class GameCrudController extends CrudController
 {
@@ -35,11 +36,14 @@ class GameCrudController extends CrudController
         $this->crud->addField([
             'name' => 'status',
             'label' => "Status",
-            'type' => 'select_from_array',
+            'type' => 'text',
             'options' => Game::getStatusList(),
             'allows_null' => false,
             'attribute' => 'status',
-
+            'attributes' => [
+                'readonly'=>'readonly'
+            ],
+            'default'=>Game::STATUS_NEW
         ]);
         $this->crud->addField([
             'label' => "Tour",
@@ -151,6 +155,17 @@ class GameCrudController extends CrudController
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();
+    }
+
+
+    public function generate_scenario(Request $request, $id){
+
+        $game = Game::find($id);
+
+
+        dd($game);
+
+        return "ok";
     }
 
     public function store(StoreRequest $request)

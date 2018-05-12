@@ -60,9 +60,6 @@ class Championship extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
-    public function finalGameAttribute(){
-        return Game::findAll();
-    }
 
     /*
     |--------------------------------------------------------------------------

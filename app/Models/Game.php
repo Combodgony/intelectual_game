@@ -25,6 +25,7 @@ class Game extends Model
     */
 
     public const STATUS_NEW = "not scheduled";
+    public const STATUS_PlAN = "planed";
     public const STATUS_END = "completed";
 
 
@@ -42,7 +43,10 @@ class Game extends Model
     |--------------------------------------------------------------------------
     */
     public static function getStatusList(){
-        return [self::STATUS_NEW=>self::STATUS_NEW, self::STATUS_END=>self::STATUS_END];
+        return [self::STATUS_NEW=>self::STATUS_NEW
+            , self::STATUS_END=>self::STATUS_END
+            , self::STATUS_PlAN=>self::STATUS_PlAN
+        ];
     }
     public function rounds(){
         return $this->belongsToMany('App\Models\Round','rounds_of_game',

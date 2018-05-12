@@ -3,18 +3,24 @@
     <style>
         .card{
             margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 5px;
             /*border-left: 1px solid red;*/
         }
-        .card-header {
+        .card-game-header {
             width: 100%;
             height: 30px;
-            /*background-color: #0b2e13;*/
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: rgba(113, 143, 66, 0.26);
+            border-radius: 4px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 3px;
         }
         .content-box{
             padding: 15px;
-        }
-        .card-body{
-            margin-left: 25px;
         }
     </style>
 
