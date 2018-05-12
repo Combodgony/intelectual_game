@@ -6,25 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
 /**
- * Class Championship
- * @property int count_tur
+ * Class Tur
+ * @property int championship_id
+ * @property int number
  * @package App\Models
  */
-class Championship extends Model
+class Tur extends Model
 {
-    use CrudTrait;
-
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'championship';
+    protected $table = 'tur';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name','count_tur'];
+//    protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,19 +33,13 @@ class Championship extends Model
     |--------------------------------------------------------------------------
     */
 
-    //todo это очень очень плохо нужно вынести в вюшку (нельзя что бы в модели были елементы вю)
-    public function viewButton(){
-        return '<a href="'.url('championship/'.$this->id.'/view').'" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> View</a>';
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function turs()
-    {
-        return $this->hasMany('App\Models\Tur');
+    public function championship(){
+        return $this->belongsTo('App\Models\Championship');
     }
 
     /*
