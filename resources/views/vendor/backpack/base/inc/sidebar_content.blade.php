@@ -9,6 +9,20 @@
 </li>
 
 <li>
+    <a href="{{ backpack_url('championship') }}">
+        <i class="fa fa-user-circle"></i>
+        <span>{{ trans('interface.menu.championships') }}</span>
+    </a>
+</li>
+
+<li>
+    <a href="{{ backpack_url('game') }}">
+        <i class="fa fa-gamepad"></i>
+        <span>{{ trans('interface.menu.games') }}</span>
+    </a>
+</li>
+
+<li>
     <a href="{{ backpack_url('gamer') }}">
         <i class="fa fa-user-times"></i>
         <span>{{ trans('interface.menu.gamers') }}</span>

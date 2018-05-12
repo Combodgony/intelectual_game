@@ -8,6 +8,8 @@ return [
         'questions'=>'Questions',
         'gamers'=>'Gamers',
         'commands'=>'Commands',
+        'championships'=>'Championships',
+        'games'=>'Games',
     ],
 
 ];

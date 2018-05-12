@@ -16,7 +16,7 @@ class CreateGameTable extends Migration
     public function up()
     {
         Schema::create('game', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->unsigned()->autoIncrement();
             $table->string('place')->nullable();
             $table->string('status')->default(Game::STATUS_NEW);
             $table->dateTime('date')->nullable();

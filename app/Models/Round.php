@@ -38,6 +38,10 @@ class Round extends Model
     public function questions(){
         return $this->hasMany('App\Models\Question');
     }
+    public function rounds(){
+        return $this->belongsToMany('App\Models\Game','rounds_of_game',
+            'round_id', 'game_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

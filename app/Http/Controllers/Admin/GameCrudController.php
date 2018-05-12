@@ -41,9 +41,35 @@ class GameCrudController extends CrudController
             'attribute' => 'status',
 
         ]);
+        $this->crud->addField([
+            'label' => "Tour",
+            'type' => 'select',
+            'attribute' => 'number', // foreign key attribute that is shown to user
+            'name' => 'tur_id', // the method that defines the relationship in your Model
+            'entity' => 'tur', // the method that defines the relationship in your Model
+            'model' => "App\\Models\\Tur", // foreign key model
+        ]);
+        $this->crud->addField([   // Select2Multiple = n-n relationship (with pivot table)
+            'label' => "Rounds",
+            'type' => 'select2_multiple',
+            'name' => 'rounds', // the method that defines the relationship in your Model
+            'entity' => 'rounds', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\\Models\\Round", // foreign key model
+            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+        ]);
+        $this->crud->addField([   // Select2Multiple = n-n relationship (with pivot table)
+            'label' => "Jury",
+            'type' => 'select2_multiple',
+            'name' => 'jury', // the method that defines the relationship in your Model
+            'entity' => 'jury', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\\User", // foreign key model
+            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+        ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
-         $this->crud->removeField('tur_id', 'update/create/both');
+//         $this->crud->removeField('tur_id', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS

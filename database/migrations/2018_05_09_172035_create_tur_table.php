@@ -14,7 +14,7 @@ class CreateTurTable extends Migration
     public function up()
     {
         Schema::create('tur', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->unsigned()->autoIncrement();
             $table->integer('number');
             $table->integer('championship_id')->unsigned();
             $table->foreign('championship_id')->references('id')->on('championship');

@@ -44,6 +44,15 @@ class Game extends Model
     public static function getStatusList(){
         return [self::STATUS_NEW=>self::STATUS_NEW, self::STATUS_END=>self::STATUS_END];
     }
+    public function rounds(){
+        return $this->belongsToMany('App\Models\Round','rounds_of_game',
+            'game_id', 'round_id');
+    }
+
+    public function jury(){
+        return $this->belongsToMany('App\Models\Round','rounds_of_game',
+            'game_id', 'round_id');
+    }
 
 
 
