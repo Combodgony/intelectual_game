@@ -29,6 +29,11 @@ class Championship extends Model
     |--------------------------------------------------------------------------
     */
 
+    //todo это очень очень плохо нужно вынести в вюшку (нельзя что бы в модели были елементы вю)
+    public function viewButton(){
+        return '<a href="'.url('championship/'.$this->id.'/view').'" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> View</a>';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

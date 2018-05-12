@@ -7,6 +7,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\UserRequest as StoreRequest;
 use App\Http\Requests\UserRequest as UpdateRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserCrudController extends CrudController
 {
@@ -37,11 +38,7 @@ class UserCrudController extends CrudController
              'label' => 'Role',
              'type' => 'enum'
          ]);
-        $this->crud->addField([   // Enum
-            'name' => 'role',
-            'label' => 'Role',
-            'type' => 'text'
-        ]);
+        //todo сделать авторизацию (при редактированиии пользователя пароль не обязательное поле)
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
@@ -120,6 +117,7 @@ class UserCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
+//        $request->attributes->set('password',Hash::make($request->password));
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
