@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Championship;
 use App\Models\Game;
 use App\Models\Tur;
+use App\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -112,6 +114,13 @@ class ChampionshipCrudController extends CrudController
         $this->data['crud'] = $this->crud;
         $this->data['title'] = 'View '.$this->crud->entity_name;
         $this->data['action'] = 'View';
+        $this->data['championship'] = Championship::find($id);
+        $this->data['championship']->finalGame = Game::join('tur','tur.id','=','game.tur_id')
+            ->join('championship','championship.id','=','tur.championship_id')
+            ->whereNull('next_game_id')
+            ->where('championship_id','=',$id)
+            ->select('game.*')
+            ->get()[0];
         return view('championship.championship_view',$this->data);
     }
 

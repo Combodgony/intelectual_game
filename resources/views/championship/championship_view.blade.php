@@ -29,50 +29,13 @@
             @include('crud::inc.grouped_errors')
 
             <div class="box content-box">
-                <div id="card-741785">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" data-parent="#card-741785"
-                               href="#card-element-342250">Финальная игра (финальный тур)</a>
-                        </div>
-                        <div id="card-element-342250" class="collapse">
-                            <div class="card-body">
-
-                                <div id="card-7417854">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <a class="card-link collapsed" data-toggle="collapse"
-                                               data-parent="#card-7417854" href="#card-element-3422503">
-                                                Игра среди школ 1-5 (2 тур)
-                                            </a>
-                                        </div>
-                                        <div id="card-element-3422503" class="collapse">
-                                            <div class="card-body">
-                                                Описание игры может результаты или кнопки просто
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <a class="card-link collapsed" data-toggle="collapse"
-                                               data-parent="#card-7417854" href="#card-element-3422506">
-                                                Игра среди школ 6-10 (2 тур)
-                                            </a>
-                                        </div>
-                                        <div id="card-element-3422506" class="collapse">
-                                            <div class="card-body">
-                                                Описание игры может результаты или кнопки просто
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <h3>{{$championship->name}}</h3>
                 </div>
+
+
+                @include('championship.game_view', ['game'=>$championship->finalGame])
+
             </div>
         </div>
     </div>
