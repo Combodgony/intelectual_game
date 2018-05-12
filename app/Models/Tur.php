@@ -41,6 +41,9 @@ class Tur extends Model
     public function championship(){
         return $this->belongsTo('App\Models\Championship');
     }
+    public function games(){
+        return $this->hasMany('App\Models\Game');
+    }
 
     /*
     |--------------------------------------------------------------------------

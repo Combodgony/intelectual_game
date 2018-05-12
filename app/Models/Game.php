@@ -41,12 +41,29 @@ class Game extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public static function getStatusList(){
+        return [self::STATUS_NEW=>self::STATUS_NEW, self::STATUS_END=>self::STATUS_END];
+    }
+
+
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    /**
+     * @return Tur
+     */
+    public function tur()
+    {
+        return $this->belongsTo('App\Models\Tur');
+    }
+
+//    public function championship(){
+//        $tur = Tur::find($this->tur_id);
+//        return Championship::where('id', ()->championship_id);
+//    }
 
     /*
     |--------------------------------------------------------------------------

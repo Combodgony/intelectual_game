@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Game;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -31,12 +32,39 @@ class GameCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+        $this->crud->addField([
+            'name' => 'status',
+            'label' => "Status",
+            'type' => 'select_from_array',
+            'options' => Game::getStatusList(),
+            'allows_null' => false,
+            'attribute' => 'status',
+
+        ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
-        // $this->crud->removeField('name', 'update/create/both');
+         $this->crud->removeField('tur_id', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
+        $this->crud->addColumn([
+            'label' => "Championship", // Table column heading
+            'type' => "select",
+            'name' => 'championship_id', // the column that contains the ID of that connected entity;
+            'entity' => 'tur.championship', // the method that defines the relationship in your Model
+            'attribute' => "name", // foreign key attribute that is shown to user
+            'model' => "App\\Models\\Championship", // foreign key model
+        ]);
+        $this->crud->addColumn([
+            'label' => "Tour", // Table column heading
+            'type' => "select",
+            'name' => 'tur_id', // the column that contains the ID of that connected entity;
+            'entity' => 'tur', // the method that defines the relationship in your Model
+            'attribute' => "number", // foreign key attribute that is shown to user
+            'sorted'=>'number',
+            'model' => "App\\Models\\Tur", // foreign key model
+        ]);
+
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack

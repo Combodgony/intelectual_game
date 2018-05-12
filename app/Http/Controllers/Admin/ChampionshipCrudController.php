@@ -9,8 +9,6 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ChampionshipRequest as StoreRequest;
 use App\Http\Requests\ChampionshipRequest as UpdateRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 
 class ChampionshipCrudController extends CrudController
 {
@@ -150,7 +148,6 @@ class ChampionshipCrudController extends CrudController
         }
         $this->gameGenerate($turs);
 
-        dd($this->data['entry']->id);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
