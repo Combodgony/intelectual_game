@@ -24,8 +24,14 @@ $preGame = \App\Models\Game::where('next_game_id', '=', $game->id)->get();
             <biv class="action">
 
                 @if($game->status==\App\Models\Game::STATUS_PlAN)
-                    <a href="{{ backpack_url('game/'.$game->id.'/generate_scenario') }}">Generate scenario <i class="fa fa-gear"></i></a>
+                    <a href="{{ backpack_url('game/'.$game->id.'/generate_scenario') }}">Generate scenario <i
+                                class="fa fa-gear"></i></a>
                 @endif
+                @if($game->status==\App\Models\Game::STATUS_GENERATED)
+                    <a href="{{ backpack_url('scenario/'.$game->id.'/view') }}">View scenario <i
+                                class="fa fa-eye"></i></a>
+                @endif
+
 
                 <a href="{{ backpack_url('game/'.$game->id.'/edit') }}">Edit <i class="fa fa-edit"></i></a>
             </biv>

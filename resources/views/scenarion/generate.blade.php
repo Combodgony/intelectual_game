@@ -1,6 +1,11 @@
 @extends('header')
 @section('content')
 
+    <style>
+        .box{
+            padding: 15px;
+        }
+    </style>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <!-- Default box -->
@@ -18,7 +23,7 @@
 
 
             <div class="box">
-                some text
+                @yield('scenario')
             </div>
         </div>
     </div>

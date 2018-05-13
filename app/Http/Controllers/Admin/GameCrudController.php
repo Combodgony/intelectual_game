@@ -235,8 +235,12 @@ class GameCrudController extends CrudController
         $this->data['action'] = 'View';
         $this->data['errors'] = $errors;
 
+        if(count($errors)>0){
+            return view('scenarion.generate', $this->data);
+        }
 
-        return view('scenarion.generate', $this->data);
+
+        return redirect("scenarion/".$game->id."/view");
     }
 
     public function store(StoreRequest $request)

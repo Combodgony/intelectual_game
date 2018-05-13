@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
@@ -15,6 +16,7 @@ use Backpack\CRUD\CrudTrait;
  * @property Tur tur
  * @property Round[] rounds
  * @property GameParticipant[] gameParticipants
+ * @property User[] jury
  *
  * @package App\Models
  */
@@ -60,8 +62,8 @@ class Game extends Model
     }
 
     public function jury(){
-        return $this->belongsToMany('App\Models\Round','rounds_of_game',
-            'game_id', 'round_id');
+        return $this->belongsToMany('App\User','jury_of_game',
+            'game_id', 'user_id');
     }
 
     public function participants(){

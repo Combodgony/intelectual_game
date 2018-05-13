@@ -3,6 +3,7 @@
 // Backpack\CRUD: Define the resources for the entities you want to CRUD.
 Route::get('championship/{id}/view', 'ChampionshipCrudController@view');
 Route::get('game/{id}/generate_scenario', 'GameCrudController@generate_scenario');
+Route::get('scenario/{id}/view', 'ScenarioController@view');
 
 
 CRUD::resource('user', 'UserCrudController');
