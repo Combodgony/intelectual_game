@@ -12,6 +12,10 @@ use Backpack\CRUD\CrudTrait;
  * @property int next_game_id
  * @property int tur_id
  *
+ * @property Tur tur
+ * @property Round[] rounds
+ * @property GameParticipant[] gameParticipants
+ *
  * @package App\Models
  */
 class Game extends Model
@@ -26,6 +30,7 @@ class Game extends Model
 
     public const STATUS_NEW = "not scheduled";
     public const STATUS_PlAN = "planed";
+    public const STATUS_GENERATED = 'scenario generated';
     public const STATUS_END = "completed";
 
 
@@ -46,6 +51,7 @@ class Game extends Model
         return [self::STATUS_NEW=>self::STATUS_NEW
             , self::STATUS_END=>self::STATUS_END
             , self::STATUS_PlAN=>self::STATUS_PlAN
+            , self::STATUS_GENERATED=>self::STATUS_GENERATED
         ];
     }
     public function rounds(){
@@ -58,6 +64,14 @@ class Game extends Model
             'game_id', 'round_id');
     }
 
+    public function participants(){
+        return $this->belongsToMany('App\Models\Command','participant_of_game',
+            'game_id', 'command_id');
+    }
+
+    public function gameParticipants(){
+        return $this->hasMany('App\Models\GameParticipant');
+    }
 
 
 

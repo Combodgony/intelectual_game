@@ -40,6 +40,11 @@ class Command extends Model
         return $this->belongsToMany('App\Models\Gamer','command_hash_gamer',
         'command_id', 'gamer_id');
     }
+    public function games(){
+        return $this->belongsToMany('App\Models\Game','participant_of_game',
+            'command_id', 'game_id');
+    }
+
 
     /*
     |--------------------------------------------------------------------------

@@ -124,6 +124,8 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,

@@ -1,4 +1,4 @@
-@extends('championship.championship')
+@extends('header')
 @section('content')
     <style>
         .card{

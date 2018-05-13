@@ -9,6 +9,9 @@ use Backpack\CRUD\CrudTrait;
  * Class Tur
  * @property int championship_id
  * @property int number
+ *
+ * @property Championship championship
+ * @property Game[] games
  * @package App\Models
  */
 class Tur extends Model

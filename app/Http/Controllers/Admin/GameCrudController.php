@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Game;
+use App\Models\GameQuestion;
+use App\Models\Question;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -41,9 +43,9 @@ class GameCrudController extends CrudController
             'allows_null' => false,
             'attribute' => 'status',
             'attributes' => [
-                'readonly'=>'readonly'
+                'readonly' => 'readonly'
             ],
-            'default'=>Game::STATUS_NEW
+            'default' => Game::STATUS_NEW
         ]);
         $this->crud->addField([
             'label' => "Tour",
@@ -62,6 +64,18 @@ class GameCrudController extends CrudController
             'model' => "App\\Models\\Round", // foreign key model
             'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
         ]);
+
+        $this->crud->addField([   // Select2Multiple = n-n relationship (with pivot table)
+            'label' => "Participants",
+            'type' => 'select2_multiple',
+            'name' => 'participants', // the method that defines the relationship in your Model
+            'entity' => 'participants', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\\Models\\Command", // foreign key model
+            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+        ]);
+
+
         $this->crud->addField([   // Select2Multiple = n-n relationship (with pivot table)
             'label' => "Jury",
             'type' => 'select2_multiple',
@@ -91,7 +105,7 @@ class GameCrudController extends CrudController
             'name' => 'tur_id', // the column that contains the ID of that connected entity;
             'entity' => 'tur', // the method that defines the relationship in your Model
             'attribute' => "number", // foreign key attribute that is shown to user
-            'sorted'=>'number',
+            'sorted' => 'number',
             'model' => "App\\Models\\Tur", // foreign key model
         ]);
 
@@ -158,14 +172,71 @@ class GameCrudController extends CrudController
     }
 
 
-    public function generate_scenario(Request $request, $id){
+    public function generate_scenario(Request $request, $id)
+    {
+
+        $errors = [];
 
         $game = Game::find($id);
 
+        $championat = $game->tur->championship;
 
-        dd($game);
+        $rounds = $game->rounds;
 
-        return "ok";
+        $questions = [];
+
+
+        for ($i = 0; $i < count($rounds); $i++) {
+            $questions[$i] = Question::leftJoin('question_of_game', 'questions.id', '=', 'question_of_game.question_id')
+                ->where('round_id', '=', $rounds[$i]->id)
+                ->where(function ($q) use ($championat) {
+                    $q->where('question_of_game.championship_id', '<>', $championat->id)
+                        ->orWhere(function ($q1) {
+                            $q1->whereNull('question_of_game.championship_id');
+                        });
+                })->select('questions.*')->get();
+            if (count($questions[$i]) < ($rounds[$i]->count_questions * 4)) {
+                $count = $rounds[$i]->count_questions * 4;
+                $errors[count($errors)] = "Не хватает " . ($count - count($questions[$i]))
+                    . " вопросов для раунда: " . $rounds[$i]->name;
+            }
+        }
+
+        if (count($errors) == 0) {
+            for ($i = 0; $i < count($rounds); $i++) {
+                foreach ($game->gameParticipants as $gp) {
+                    for ($j = 0; $j < $rounds[$i]->count_questions; $j++) {
+                        $gameQuestion = new GameQuestion();
+                        $gameQuestion->championship_id = $championat->id;
+                        $gameQuestion->game_id = $game->id;
+                        $gameQuestion->participant_of_game_id = $gp->id;
+                        $index = rand(0,count($questions[$i])-1);
+
+                        $gameQuestion->question_id = ($questions[$i][$index])->id;
+                        $gameQuestion->save();
+                        for($k=$index; $k<count($questions[$i])-1; $k++){
+                            $questions[$i][$k]=$questions[$i][$k+1];
+                        }
+                        if(count($questions[$i])==0){
+                            dd($questions[$i]);
+                        }
+                        unset($questions[$i][count($questions[$i])-1]);
+                    }
+                }
+            }
+//            $game->status=Game::STATUS_GENERATED;
+//            $game->save();
+        }
+
+        $this->crud->entity_name_plural = "Scenario";
+        $this->crud->entity_name = "scenario";
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = 'View ' . $this->crud->entity_name;
+        $this->data['action'] = 'View';
+        $this->data['errors'] = $errors;
+
+
+        return view('scenarion.generate', $this->data);
     }
 
     public function store(StoreRequest $request)
@@ -181,6 +252,14 @@ class GameCrudController extends CrudController
     {
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
+
+        if (count($this->crud->entry->participants) == 4) {
+            if ($this->crud->entry->status == Game::STATUS_NEW) {
+                $this->crud->entry->status = Game::STATUS_PlAN;
+                $this->crud->entry->save();
+            }
+        }
+
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
