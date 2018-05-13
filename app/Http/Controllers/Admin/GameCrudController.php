@@ -224,8 +224,8 @@ class GameCrudController extends CrudController
                     }
                 }
             }
-//            $game->status=Game::STATUS_GENERATED;
-//            $game->save();
+            $game->status=Game::STATUS_GENERATED;
+            $game->save();
         }
 
         $this->crud->entity_name_plural = "Scenario";
