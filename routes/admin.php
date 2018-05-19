@@ -5,7 +5,7 @@ Route::get('championship/{id}/view', 'ChampionshipCrudController@view');
 Route::get('game/{id}/generate_scenario', 'GameCrudController@generate_scenario');
 Route::get('scenario/{id}/view', 'ScenarioController@view');
 
-
+Route::get('/dashboard', 'DashboardController@index');
 CRUD::resource('user', 'UserCrudController');
 CRUD::resource('round', 'RoundCrudController');
 CRUD::resource('question', 'QuestionCrudController');
