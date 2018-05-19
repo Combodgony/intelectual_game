@@ -1,5 +1,5 @@
 @extends("backpack::layout")
 
 @section('content')
-    @if()
+    Обратитесь к админимтратору
 @endsection

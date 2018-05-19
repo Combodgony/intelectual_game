@@ -50,10 +50,10 @@
         <span>{{ trans('interface.menu.questions') }}</span>
     </a>
 </li>
-<?php endif; ?>
 <li>
     <a href="{{ backpack_url('user') }}">
         <i class="fa fa-user"></i>
         <span>{{ trans('interface.menu.users') }}</span>
     </a>
 </li>
+<?php endif; ?>

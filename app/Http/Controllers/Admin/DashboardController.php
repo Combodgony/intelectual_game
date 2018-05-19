@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
         $user = User::find(Auth::id());
         
-        dd($user);
+//        dd($user);
         return view('dashboard');
     }
 }
