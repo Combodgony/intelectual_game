@@ -240,7 +240,7 @@ class GameCrudController extends CrudController
         }
 
 
-        return redirect("scenarion/".$game->id."/view");
+        return redirect("scenario/".$game->id."/view");
     }
 
     public function store(StoreRequest $request)
@@ -254,6 +254,7 @@ class GameCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
+
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
 

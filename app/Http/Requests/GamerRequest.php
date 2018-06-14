@@ -25,8 +25,14 @@ class GamerRequest extends FormRequest
      */
     public function rules()
     {
+        $dt = new \Carbon\Carbon();
+        $before = $dt->subYears(13)->format('Y-m-d');
         return [
-            // 'name' => 'required|min:5|max:255'
+//            first_name','','birthday','info'
+             'first_name' => 'required|min:5|max:255',
+             'last_name' => 'required|min:5|max:255',
+             'info' => 'required|min:5|max:255',
+             'birthday' => 'required|before:-7 years',
         ];
     }
 
